@@ -456,6 +456,21 @@ config file to be able to detect config errors
 			type: object ++
 			css class: widget-buttons (access buttons with >flowbox>flowboxchild>button) ++
 			properties: ++
+				center: ++
+					type: bool ++
+					optional: true ++
+					default: false ++
+					description: set buttons-grid halign to center ++
+				column-min: ++
+					type: integer ++
+					optional: true ++
+					default: 0 ++
+					description: minimum number of buttons per line ++
+				column-max: ++
+					type: integer ++
+					optional: true ++
+					default: 0 ++
+					description: maximum number of buttons per line ++
 				actions: ++
 					type: array ++
 					Default values: [] ++
