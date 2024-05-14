@@ -336,6 +336,12 @@ config file to be able to detect config errors
 					default: false ++
 					description: Whether to hide the widget when the ++
 								 player has no metadata. ++
+				blacklist: ++
+					type: array ++
+					optional: true ++
+					default: [] ++
+					description: Mpris players to be ignored, without the bus name prefix. ++
+						you may check with `qdbus|grep -i mpris` ++
 			description: A widget that displays multiple music players. ++
 		*menubar*++
 			type: object ++
@@ -602,6 +608,7 @@ config file to be able to detect config errors
 		"mpris": {
 			"image-size": 96,
 			"autohide": true
+			"blacklist": ["playerctld"]
 		},
 		"menubar": {
 			"menu#power": {
