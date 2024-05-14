@@ -409,6 +409,15 @@
           "type": "integer",
           "description": "The size of the album art",
           "default": 96
+        },
+        "blacklist": {
+          "type": "array",
+          "description": "Mpris players to be ignored, without the bus name prefix",
+          "default": [],
+          "items": {
+            "type": "string",
+            "description": "Basename of mpris bus name, Uses Regex."
+          }
         }
       }
     },
