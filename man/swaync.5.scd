@@ -236,6 +236,8 @@ config file to be able to detect config errors
 			optional: true ++
 		*buttons-grid*++
 			optional: true ++
+		*slider*++
+			optional: true ++
 #START pulse-audio
 		*volume*++
 			optional: true ++
@@ -476,6 +478,51 @@ config file to be able to detect config errors
 								description: Wether the toggle button is active as default or not ++
 					description: A list of actions containing a label and a command ++
 			description: A grid of buttons that execute shell commands ++
+		*slider*++
+			type: object ++
+			css class: widget-slider ++
+			properties: ++
+				label: ++
+					type: string ++
+					optional: true ++
+					default: "slider" ++
+					description: Text displayed in front of the slider ++
+				cmd_setter: ++
+					type: string ++
+					optional: true ++
+					default: "" ++
+					description: command to set the value ++
+				cmd_getter: ++
+					type: string ++
+					optional: true ++
+					default: "" ++
+					description: command to get the actual value ++
+				min: ++
+					type: integer ++
+					optional: true ++
+					default: 0 ++
+					description: minimum value of the slider range ++
+				max: ++
+					type: integer ++
+					optional: true ++
+					default: 100 ++
+					description: maximum value of the slider range ++
+				min_limit: ++
+					type: integer ++
+					optional: true ++
+					default: 0 ++
+					description: limit minimum value of the slider ++
+				max_limit: ++
+					type: integer ++
+					optional: true ++
+					default: 100 ++
+					description: limit maximum value of the slider ++
+				value_scale: ++
+					type: integer ++
+					optional: true ++
+					default: 0 ++
+					description: scale small value, slider round digits ++
+			description: general slider control ++
 #START pulse-audio
 		*volume*++
 			type: object ++
