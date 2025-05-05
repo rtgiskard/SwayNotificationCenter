@@ -83,18 +83,6 @@ namespace SwayNotificationCenter.Widgets.Mpris {
                 int? image_size = get_prop<int> (config, "image-size");
                 if (image_size != null) mpris_config.image_size = image_size;
 
-                // Get image-border-radius
-                int? image_radius = get_prop<int> (config, "image-radius");
-                if (image_radius != null) mpris_config.image_radius = image_radius;
-                // Clamp the radius
-                mpris_config.image_radius = mpris_config.image_radius.clamp (
-                    0, (int) (mpris_config.image_size * 0.5));
-
-                // Get blur
-                bool blur_found;
-                bool? blur = get_prop<bool> (config, "blur", out blur_found);
-                if (blur_found) mpris_config.blur = blur;
-
                 // Get autohide
                 bool autohide_found;
                 bool? autohide = get_prop<bool> (config, "autohide", out autohide_found);
