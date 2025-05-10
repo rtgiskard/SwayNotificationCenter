@@ -280,7 +280,7 @@ namespace SwayNotificationCenter {
                 }
 
                 string[] argvp;
-                Shell.parse_argv ("/bin/sh -c \"%s\"".printf (cmd), out argvp);
+                Shell.parse_argv (cmd, out argvp);
 
                 Pid child_pid;
                 int std_output;

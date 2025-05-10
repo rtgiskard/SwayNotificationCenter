@@ -2,7 +2,6 @@ namespace SwayNotificationCenter.Widgets.Mpris {
     public struct Config {
         int image_size;
         bool autohide;
-        string[] blacklist;
     }
 
     public class Mpris : BaseWidget {
@@ -84,18 +83,6 @@ namespace SwayNotificationCenter.Widgets.Mpris {
                 int? image_size = get_prop<int> (config, "image-size");
                 if (image_size != null) mpris_config.image_size = image_size;
 
-                Json.Array ? blacklist = get_prop_array (config, "blacklist");
-                if (blacklist != null) {
-                    mpris_config.blacklist = new string[blacklist.get_length ()];
-                    for (int i = 0; i < blacklist.get_length (); i++) {
-                        if (blacklist.get_element (i).get_node_type () != Json.NodeType.VALUE) {
-                            warning ("Blacklist entries should be strings");
-                            continue;
-                        }
-                        mpris_config.blacklist[i] = blacklist.get_string_element (i);
-                    }
-                }
-
                 // Get autohide
                 bool autohide_found;
                 bool? autohide = get_prop<bool> (config, "autohide", out autohide_found);
@@ -117,7 +104,6 @@ namespace SwayNotificationCenter.Widgets.Mpris {
             string[] names = dbus_iface.list_names ();
             foreach (string name in names) {
                 if (!name.has_prefix (MPRIS_PREFIX)) continue;
-                if (is_blacklisted (name)) continue;
                 if (check_player_exists (name)) return;
                 MprisSource ? source = MprisSource.get_player (name);
                 if (source != null) add_player (name, source);
@@ -129,7 +115,6 @@ namespace SwayNotificationCenter.Widgets.Mpris {
                     remove_player (name);
                     return;
                 }
-                if (is_blacklisted (name)) return;
                 if (check_player_exists (name)) return;
                 MprisSource ? source = MprisSource.get_player (name);
                 if (source != null) add_player (name, source);
@@ -228,19 +213,6 @@ namespace SwayNotificationCenter.Widgets.Mpris {
             uint position = ((uint) carousel.position + delta)
                 .clamp (0, (children_length - 1));
             carousel.scroll_to (carousel.get_nth_page (position), true);
-        }
-
-        private bool is_blacklisted (string name) {
-            foreach (string blacklistedPattern in mpris_config.blacklist) {
-                if (blacklistedPattern == null || blacklistedPattern.length == 0) {
-                    continue;
-                }
-                if (GLib.Regex.match_simple (blacklistedPattern, name, RegexCompileFlags.DEFAULT, 0)) {
-                    message ("\"%s\" is blacklisted", name);
-                    return true;
-                }
-            }
-            return false;
         }
     }
 }
