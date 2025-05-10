@@ -36,9 +36,9 @@ namespace SwayNotificationCenter.Widgets {
                 int ? minl = get_prop<int> (config, "min_limit");
                 round_digits = get_prop<int> (config, "value_scale");
 
-                if (min == null)min = 0;
-                if (max == null)max = 100;
-                if (round_digits == null)round_digits = 0;
+                if (min == null) min = 0;
+                if (max == null) max = 100;
+                if (round_digits == null) round_digits = 0;
 
                 max_limit = maxl != null ? double.min (max, maxl) : max;
 
